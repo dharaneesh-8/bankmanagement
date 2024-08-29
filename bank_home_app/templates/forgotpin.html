@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'forgotpin.css' %}">
+    <title>Forgot PIN</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1><img src="{% static 'logo.png' %}" alt="R Bank Logo" class="logo"> Forgot PIN</h1>
+        </div>
+        
+        <form method="post">
+            
+            {% csrf_token %}
+            <h2>OTP is being sent to your registered email: <strong>{{ data.email|safe }}</strong></h2>
+            <p>Please check your email and enter the OTP</p>
+            <button type="submit" class="btn btn-primary">Proceed to Enter OTP</button>
+        </form>
+
+        <a href="{% url '2' %}" class="back-button">Back</a>
+    </div>
+</body>
+</html>

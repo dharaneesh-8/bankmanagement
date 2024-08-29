@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Management</title>
+    <link rel="stylesheet" href="{% static 'forgot.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <img src="{% static 'logo.png' %}" alt="Bank Logo" class="logo">
+        <h1>R Bank Management</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="account">Account Number</label>
+            <input type="text" id="account" name="account" required>
+            <button type="submit" class="btn btn-primary">Proceed to Enter OTP</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'deposit.css' %}">
+    <title>Deposit Amount</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1><img src="{% static 'logo.png' %}" alt="R Bank Logo" class="logo"> Deposit Amount</h1>
+            <h2>Account Holder: {{ data.first_name }}</h2>
+        </div>
+        <div class="form-container">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="amount">Enter Amount to Deposit:</label>
+                    <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter amount" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Deposit</button>
+            </form>
+
+            {% if message %}
+            <div class="alert alert-info message">
+                {{ message }}
+            </div>
+            {% endif %}
+
+            <div class="balance-info text-center mt-3">
+                <p>Current Balance: <strong>₹{{ data.balance_amount }}</strong></p>
+            </div>
+        </div>
+        <a href="{% url '3' data.id %}" class="back-button">Back</a>
+        <a href="{% url 'transaction_history' data.id %}" class="back-button">Transaction History</a>
+    </div>
+</body>
+
+</html>

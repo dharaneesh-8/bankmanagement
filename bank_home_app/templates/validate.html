@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Management System</title>
+    <link rel="stylesheet" href="{% static 'validate.css' %}">
+</head>
+<body>
+    <div class="container" style="padding: 15px;">
+        <img src="{% static 'logo.png' %}" alt="" class="logo" style="height: 30%; width: 30%; margin-left: 150px;"> 
+        <h1>R Bank Management System</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Verify</button> <bR></bR>
+        </form>
+
+        <a href="{% url 'forgot' %}"><button type="submit" name="forgot_pin" style="position: absolute; top: 82%; left: 44%;" >Forgot Password</button></a>
+
+    </div>
+</body>
+</html>

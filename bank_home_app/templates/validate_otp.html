@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validate OTP and Reset PIN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        .logo {
+        width: 120px;
+        height: 120px;
+        margin-right: 15px;
+        vertical-align: middle;
+}
+        .form-container {
+            background-color: #fff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        .form-container h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .otp-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .otp-input {
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            text-align: center;
+            font-size: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+        .otp-input:focus {
+            border-color: #4a90e2;
+        }
+        .form-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .form-container button {
+            background-color: #4a90e2;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-container button:hover {
+            background-color: #357ab8;
+        }
+        .timer {
+            margin: 20px 0;
+            font-size: 16px;
+            color: #e74c3c;
+        }
+        .logo {
+            width: 100px; /* Adjust as needed */
+            margin-bottom: 20px;
+        }
+        button {
+    padding: 10px;
+    background: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #4cae4c;
+}
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
+        <h1>Enter OTP and New PIN</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="otp-container">
+                {{ form.otp_1 }}
+                {{ form.otp_2 }}
+                {{ form.otp_3 }}
+                {{ form.otp_4 }}
+                {{ form.otp_5 }}
+                {{ form.otp_6 }}
+            </div>
+            <div>
+                {{ form.new_pin.label_tag }}<br>
+                {{ form.new_pin }}
+            </div>
+            <button type="submit">Submit</button>
+            <div class="timer" id="timer">OTP expires in 60 seconds</div>
+        </form>
+        <script>
+          
+            function setupOtpInput() {
+                const otpInputs = document.querySelectorAll('.otp-input');
+                
+                otpInputs.forEach((input, index) => {
+                    input.addEventListener('keyup', (e) => {
+                        if (e.key.match(/[0-9]/)) {
+                            
+                            if (index < otpInputs.length - 1) {
+                                otpInputs[index + 1].focus();
+                            }
+                        } else if (e.key === 'Backspace') {
+                            
+                            if (index > 0) {
+                                otpInputs[index - 1].focus();
+                            }
+                        }
+                    });
+                });
+            }
+
+            
+            function startTimer(duration, display) {
+                let timer = duration, minutes, seconds;
+                setInterval(function () {
+                    minutes = parseInt(timer / 60, 10);
+                    seconds = parseInt(timer % 60, 10);
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+                    display.textContent = "OTP expires in " + minutes + ":" + seconds;
+                    if (--timer < 0) {
+                        display.textContent = "OTP expired!";
+                    }
+                }, 1000);
+            }
+
+            window.onload = function () {
+                setupOtpInput();
+                let timeLimit = 60, 
+                    display = document.querySelector('#timer');
+                startTimer(timeLimit, display);
+            };
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+/* Styles for the body */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Form container styles */
+.form-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 400px; /* Adjusted width for a more balanced look */
+}
+
+/* Logo styles */
+.logo {
+    width: 120px; /* Adjust the size as needed */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Header styling */
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Account input field styling */
+input[type="text"] {
+    width: calc(100% - 20px); /* Adjust for padding */
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background: #5cb85c;
+}
+
+/* Label styling */
+label {
+    font-size: 18px;
+    color: #555;
+}

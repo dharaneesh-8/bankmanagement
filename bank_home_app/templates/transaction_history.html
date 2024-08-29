@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'transaction.css' %}">
+    <title>Transaction History</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1><img src="{% static 'logo.png' %}" alt="R Bank Logo" class="logo"> Transactions</h1>
+            <h2>Account Holder: {{ account.first_name }}</h2>
+        </div>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Date & Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.transaction_type }}</td>
+                        <td>₹{{ transaction.amount }}</td>
+                        <td>{{ transaction.description }}</td>
+                        <td>{{ transaction.timestamp }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">No transactions found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="{% url '3' account.id %}" class="back-button">Back</a>
+        <a href="{% url 'home' %}" class="back-button" >Logout</a>
+    </div>
+</body>
+
+</html>

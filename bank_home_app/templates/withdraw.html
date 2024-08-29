@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'withdraw.css' %}">
+    <title>Withdraw Amount</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1><img src="{% static 'logo.png' %}" alt="R Bank Logo" class="logo"> Withdraw Amount</h1>
+            <h2>Account Holder: {{ data.first_name }}</h2>
+        </div>
+        <div class="form-container">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="amount">Enter Amount:</label>
+                    <input type="text" name="amount" id="amount">
+                </div>
+                <button type="submit">Withdraw</button>
+            </form>
+            {% if message %}
+            <h1>{{message}}</h1>
+            {% else %}
+            <h1>{{message}}</h1>
+            {% endif %}
+        </div>
+        <a href="{% url '3' data.id %}" class="back-button">Back</a>
+    </div>
+</body>
+
+</html>
